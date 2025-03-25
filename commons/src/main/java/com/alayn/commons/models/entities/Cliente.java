@@ -24,7 +24,7 @@ public class Cliente {
     @Id
 	@GeneratedValue(strategy =GenerationType.SEQUENCE, generator ="CLIENTES_SEQ")
 	@SequenceGenerator(name="CLIENTES_SEQ", sequenceName ="CLIENTES_SEQ", allocationSize = 1 )
-	@Column(name= "CLIENTES_SEQ")
+	@Column(name= "ID_CLIENTE")
 	private long idCliente;
     
     
@@ -47,7 +47,7 @@ public class Cliente {
     
     @Column(name= "TELEFONO")
    	@NotBlank(message = "El telefono del cliente es obligatorio")
-   	@Size(min=1,max=10,message="El numero debe tener 10 caracteres")
+   	@Size(min=1,max=20,message="El numero debe tener 10 caracteres")
 	private String Telefono;
     
     @Column(name= "DIRECCION")
@@ -78,11 +78,11 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public String geteMail() {
+	public String getEMail() {
 		return eMail;
 	}
 
-	public void seteMail(String eMail) {
+	public void setEMail(String eMail) {
 		this.eMail = eMail;
 	}
 

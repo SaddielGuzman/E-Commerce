@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 
 @SpringBootApplication
-@EntityScan({"com.alayn.commons.models.entity"})
+@EntityScan({"com.alayn.commons.models.entities"})
 public class MicroserviciosProductosApplication {
 
 	public static void main(String[] args) {
