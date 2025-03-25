@@ -1,4 +1,4 @@
-package com.alayn.pedidos.mapper;
+package com.alayn.lista.productos.mapper;
 
 import org.springframework.stereotype.Component;
 

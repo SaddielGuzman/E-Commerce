@@ -7,7 +7,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @EnableFeignClients
 @SpringBootApplication
-@EntityScan({"com.alayn.commons.models.entity"})
+@EntityScan("com.alayn.commons.models.entities")
 public class MicroserviciosPedidosApplication {
 
 	public static void main(String[] args) {
