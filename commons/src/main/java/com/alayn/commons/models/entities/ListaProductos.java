@@ -28,6 +28,16 @@ public class ListaProductos {
     @CollectionTable(name = "LISTA_PRODUCTOS_ITEMS", joinColumns = @JoinColumn(name = "ID_LISTA_PRODUCTOS"))
     private List<ProductoItem> productos;
 
+    public void imprimirProductos() {
+        System.out.println("Productos en ListaProductos " + idListaProductos + ":");
+        if (productos != null) {
+            for (ProductoItem producto : productos) {
+                System.out.println("  ID Producto: " + producto.getIdProducto());
+            }
+        } else {
+            System.out.println("  Lista de productos es nula.");
+        }
+    }
     @Embeddable
     public static class ProductoItem {
         private Long idProducto;
@@ -41,19 +51,13 @@ public class ListaProductos {
         }
     }
 
-    // Constructor para inicializar la lista
+   
     public ListaProductos() {
         this.productos = new ArrayList<>();
     }
 
-    // Método para agregar productos a la lista
-    public void agregarProducto(Long idProducto) {
-        ProductoItem productoItem = new ProductoItem();
-        productoItem.setIdProducto(idProducto);
-        this.productos.add(productoItem);
-    }
 
-    // Getters y setters...
+ 
     public Long getIdListaProductos() {
         return idListaProductos;
     }

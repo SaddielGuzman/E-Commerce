@@ -13,11 +13,8 @@ public class ListaProductosMapper {
             return null;
         }
         ListaProductoDTO listaProductoDTO = new ListaProductoDTO();
-      
-       
-        
-   
-      
+        listaProductoDTO.setIdListaProductos(listaProductos.getIdListaProductos());
+        listaProductoDTO.setProductos(listaProductos.getProductos()); // Copiar la lista de productos
         return listaProductoDTO;
     }
 
@@ -26,8 +23,8 @@ public class ListaProductosMapper {
             return null;
         } else {
             ListaProductos listaProductos = new ListaProductos();
-
-            
+            listaProductos.setIdListaProductos(listaProductoDTO.getIdListaProductos());
+            listaProductos.setProductos(listaProductoDTO.getProductos()); // Copiar la lista de productos
             return listaProductos;
         }
     }

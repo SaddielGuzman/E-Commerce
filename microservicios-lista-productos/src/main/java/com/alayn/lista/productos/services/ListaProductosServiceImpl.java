@@ -10,28 +10,28 @@ import com.alayn.commons.services.CommonServiceImpl;
 import com.alayn.lista.productos.dto.ListaProductoDTO;
 import com.alayn.lista.productos.mapper.ListaProductosMapper;
 import com.alayn.lista.productos.models.repositories.ListaProductoRepository;
-
 @Service
 public class ListaProductosServiceImpl extends CommonServiceImpl<ListaProductos, ListaProductoRepository> implements ListaProductosService {
 
     private final ListaProductosMapper mapper;
+    private final ListaProductoRepository listaProductoRepository;
 
-    public ListaProductosServiceImpl(ListaProductosMapper mapper) {
+    public ListaProductosServiceImpl(ListaProductosMapper mapper, ListaProductoRepository listaProductoRepository) {
         this.mapper = mapper;
+        this.listaProductoRepository = listaProductoRepository;
     }
 
     @Override
     @Transactional
     public ListaProductos update(ListaProductoDTO listaProductoDTO, Long id) {
-        Optional<ListaProductos> optListaProductos = repository.findById(id);
+        Optional<ListaProductos> optListaProductos = listaProductoRepository.findById(id);
         if (optListaProductos.isPresent()) {
             ListaProductos listaProductosDb = optListaProductos.get();
             
+            listaProductosDb.setIdListaProductos(listaProductoDTO.getIdListaProductos());
+            listaProductosDb.setProductos(listaProductoDTO.getProductos());
 
-            ListaProductos listaProductosActualizado = mapper.dtoToEntity(listaProductoDTO);
-        
-           
-            return repository.save(listaProductosActualizado);
+            return listaProductoRepository.save(listaProductosDb);
         }
         return null;
     }
@@ -39,7 +39,21 @@ public class ListaProductosServiceImpl extends CommonServiceImpl<ListaProductos,
     @Override
     @Transactional
     public ListaProductos createListaProductoDTO(ListaProductoDTO listaProductoDTO) {
+        System.out.println("DTO de productos: " + listaProductoDTO.getProductos());
         ListaProductos listaProductos = mapper.dtoToEntity(listaProductoDTO);
-        return repository.save(listaProductos);
+        return listaProductoRepository.save(listaProductos);
+    }
+
+    @Transactional
+    public ListaProductos obtenerListaConProductos(Long id) {
+      
+        ListaProductos lista = listaProductoRepository.findById(id).orElse(null);
+
+        if (lista != null) {
+          
+            lista.getProductos().size(); 
+        }
+        
+        return lista;
     }
 }
