@@ -13,9 +13,11 @@ public class ListaProductosMapper {
             return null;
         }
         ListaProductoDTO listaProductoDTO = new ListaProductoDTO();
-        listaProductoDTO.setIdListaProductos(listaProductos.getIdListaProductos());
+      
+       
         
-        listaProductoDTO.setPedido(listaProductos.getPedido());
+   
+      
         return listaProductoDTO;
     }
 
@@ -24,9 +26,8 @@ public class ListaProductosMapper {
             return null;
         } else {
             ListaProductos listaProductos = new ListaProductos();
-            listaProductos.setIdListaProductos(listaProductoDTO.getIdListaProductos());
-           
-            listaProductos.setPedido(listaProductoDTO.getPedido());
+
+            
             return listaProductos;
         }
     }

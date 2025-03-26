@@ -26,10 +26,10 @@ public class ListaProductosServiceImpl extends CommonServiceImpl<ListaProductos,
         Optional<ListaProductos> optListaProductos = repository.findById(id);
         if (optListaProductos.isPresent()) {
             ListaProductos listaProductosDb = optListaProductos.get();
+            
 
             ListaProductos listaProductosActualizado = mapper.dtoToEntity(listaProductoDTO);
-            listaProductosActualizado.setIdListaProductos(id);
-            listaProductosActualizado.setPedido(listaProductosDb.getPedido());
+        
            
             return repository.save(listaProductosActualizado);
         }
