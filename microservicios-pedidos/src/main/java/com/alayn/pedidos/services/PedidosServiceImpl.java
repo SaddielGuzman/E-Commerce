@@ -12,7 +12,7 @@ import com.alayn.pedidos.mapper.PedidoMapper;
 import com.alayn.pedidos.models.repositories.PedidoRepository;
 
 
-import jakarta.validation.ReportAsSingleViolation;
+
 
 @Service
 public class PedidosServiceImpl extends CommonServiceImpl <Pedido, PedidoRepository> implements PedidoService{

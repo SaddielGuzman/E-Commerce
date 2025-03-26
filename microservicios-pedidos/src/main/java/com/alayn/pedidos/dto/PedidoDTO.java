@@ -1,15 +1,10 @@
 package com.alayn.pedidos.dto;
 
 
-import java.time.LocalDate;
+import java.sql.Date;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.SequenceGenerator;
-import jakarta.persistence.Table;
+
+
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -32,25 +27,24 @@ public class PedidoDTO {
     
  
    	@NotBlank(message = "EL ID DE LA LISTA PRODUCTOS ES OBLIGATORIO")
-	private Long idListaProductos;
+   	private Long idListaProductos;
     
   
    	@NotBlank(message = "EL TOTAL DEBE SER MAYOR A 0")
    	@Size(min=1,max=50,message="El email debe tener entre 1 y 50 caracteres")
-	private String total;
+	private Double total;
     
    
    	@NotBlank(message = "DEBE DE TENER FECHA")
 	@Past(message = "LA FECHA DEL PRIMER VUELO DEBE SER ANTERIOR A LA FECHA ACTUAL")
-	private LocalDate fechaCreacion;
+	private Date fechaCreacion;
     
     
   
 	@NotNull(message = "EL ESTATUS ES OBLIGATORIO")
 	@Min(value = 1, message = "EL ESTATUS DEBE SER AL MENOS 1")
 	@Max(value = 4, message = "EL ESTATUS NO DEBE SER MAYOR A 4")
-	private Long estatus;
-
+	private String estatus;
 
 
 
@@ -60,11 +54,9 @@ public class PedidoDTO {
 
 
 
-
 	public void setIdPedido(long idPedido) {
 		this.idPedido = idPedido;
 	}
-
 
 
 
@@ -74,11 +66,9 @@ public class PedidoDTO {
 
 
 
-
 	public void setIdCliente(Long idCliente) {
 		this.idCliente = idCliente;
 	}
-
 
 
 
@@ -88,64 +78,45 @@ public class PedidoDTO {
 
 
 
-
 	public void setIdListaProductos(Long idListaProductos) {
 		this.idListaProductos = idListaProductos;
 	}
 
 
 
-
-	public String getTotal() {
+	public Double getTotal() {
 		return total;
 	}
 
 
 
-
-	public void setTotal(String total) {
+	public void setTotal(Double total) {
 		this.total = total;
 	}
 
 
 
-
-	public LocalDate getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
 
 
 
-
-	public void setFechaCreacion(LocalDate fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 
 
 
-
-	public Long getEstatus() {
+	public String getEstatus() {
 		return estatus;
 	}
 
 
 
-
-	public void setEstatus(Long estatus) {
+	public void setEstatus(String estatus) {
 		this.estatus = estatus;
 	}
-
-
-
-
-	@Override
-	public String toString() {
-		return "PedidoDTO [idPedido=" + idPedido + ", idCliente=" + idCliente + ", idListaProductos=" + idListaProductos
-				+ ", total=" + total + ", fechaCreacion=" + fechaCreacion + ", estatus=" + estatus + "]";
-	}
-
-
-
 
 
 

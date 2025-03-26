@@ -3,22 +3,25 @@ package com.alayn.commons.models.entities;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+
 @Entity
 @Table(name = "LISTA_PRODUCTOS")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ListaProductos {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "LISTA_PRODUCTOS_SEQ")
-    @SequenceGenerator(name = "LISTA_PRODUCTOS_SEQ", sequenceName = "LISTA_PRODUCTOS_SEQ", allocationSize = 1)
-    @Column(name = "ID_LISTA_PRODUCTOS")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_LISTA_PRODUCTOS") 
     private Long idListaProductos;
 
-    @ElementCollection
-    @CollectionTable(name = "LISTA_PRODUCTOS_ITEMS", joinColumns = @JoinColumn(name = "ID_LISTA_PRODUCTOS"))
-    private List<ProductoItem> productosItems;
 
-    @OneToOne
-    @JoinColumn(name = "ID_PEDIDO")
+
+    @OneToOne(mappedBy = "listaProductos")
+    @JsonIgnore
     private Pedido pedido;
 
     @Embeddable
@@ -62,13 +65,7 @@ public class ListaProductos {
         this.idListaProductos = idListaProductos;
     }
 
-    public List<ProductoItem> getProductosItems() {
-        return productosItems;
-    }
 
-    public void setProductosItems(List<ProductoItem> productosItems) {
-        this.productosItems = productosItems;
-    }
 
     public Pedido getPedido() {
         return pedido;

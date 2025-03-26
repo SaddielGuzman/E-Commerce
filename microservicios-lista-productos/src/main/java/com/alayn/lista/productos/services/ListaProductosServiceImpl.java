@@ -30,7 +30,7 @@ public class ListaProductosServiceImpl extends CommonServiceImpl<ListaProductos,
             ListaProductos listaProductosActualizado = mapper.dtoToEntity(listaProductoDTO);
             listaProductosActualizado.setIdListaProductos(id);
             listaProductosActualizado.setPedido(listaProductosDb.getPedido());
-            listaProductosActualizado.setProductosItems(listaProductoDTO.getProductosItems());
+           
             return repository.save(listaProductosActualizado);
         }
         return null;
