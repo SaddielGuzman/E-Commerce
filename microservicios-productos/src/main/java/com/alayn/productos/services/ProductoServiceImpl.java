@@ -19,9 +19,9 @@ public class ProductoServiceImpl extends CommonServiceImpl<Producto, ProductoRep
         if (optProducto.isPresent()) {
             Producto productoDb = optProducto.get();
             productoDb.setNombre(producto.getNombre());
-            productoDb.setDESCRIPCION(producto.getDESCRIPCION());
-            productoDb.setPRECIO(producto.getPRECIO());
-            productoDb.setSTOCK(producto.getSTOCK());
+            productoDb.setDescripcion(producto.getDescripcion());
+            productoDb.setPrecio(producto.getPrecio());
+            productoDb.setStock(producto.getStock());
             repository.save(productoDb);
             return productoDb;
         }

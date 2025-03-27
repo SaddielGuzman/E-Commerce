@@ -26,7 +26,7 @@ public class ClienteServiceImpl extends CommonServiceImpl<Cliente,ClienteReposit
 			Cliente clienteDb=optCliente.get();
 			clienteDb.setNombre(cliente.getNombre());
 			clienteDb.setApellido(cliente.getApellido());
-			clienteDb.setEMail(cliente.getEMail());
+			clienteDb.seteMail(cliente.geteMail());
 			clienteDb.setTelefono(cliente.getTelefono());
 			clienteDb.setDireccion(cliente.getDireccion());
 			repository.save(clienteDb);
