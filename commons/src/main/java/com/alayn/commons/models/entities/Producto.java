@@ -1,10 +1,15 @@
 package com.alayn.commons.models.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -16,85 +21,87 @@ import jakarta.validation.constraints.Size;
 @Table(name="PRODUCTOS")
 public class Producto {
 	
+	
+	
     @Id
-
-	private Long idProducto;
+	@GeneratedValue(strategy =GenerationType.SEQUENCE, generator ="PRODUCTOS_SEQ")
+	@SequenceGenerator(name="PRODUCTOS_SEQ", sequenceName ="PRODUCTOS_SEQ", allocationSize = 1 )
+	@Column(name= "ID_PRODUCTO")
+	private long id;
+    
+   
     
     
     @Column(name= "NOMBRE")
-	@NotBlank(message = "EL NOMBRE DEL PRODUCTO ES OBLIGATORIO")
-	@Size(min=1,max=50,message="EL NOMBRE NO PUEDE TENER MAS DE 50 CARACTERES Y MENOS DE 1")
-	private String NOMBRE;
+	@NotBlank(message = "El nombre del producto es obligatorio")
+	@Size(min=1,max=50,message="El nombre debe tener entre 1 y 50 caracteres")
+	private String nombre;
     
     
     @Column(name= "DESCRIPCION")
-   	@NotBlank(message = "LA DESCRIPPCION ES OBLIGATORIA")
-   	@Size(min=1,max=50,message="LA DESCRIPCION NO PUEDE SER MAYOR A 50 CARACTERES")
-	private String DESCRIPCION;
+   	@NotBlank(message = "La descripciondel producto es obligatorio")
+   	@Size(min=1,max=50,message="la descripcion debe tener entre 1 y 100 caracteres")
+	private String descripcion;
     
     
-    @Column(name = "PRECIO")
-    @NotNull(message = "EL PRECIO DEL PRODUCTO ES OBLIGATORIO") 
-    @Min(value = 1, message = "EL PRECIO DEBE SER MAYOR A 0")
-    private Integer PRECIO;
+    @Column(name= "PRECIO")
+	@NotNull(message = "El precio es obligatorio")
+    @Min(value=0, message="El precio no puede ser menos de 1")
+	private double precio;
     
-    
-    @Column(name = "STOCK")
-    @NotNull(message = "EL STOCK DEL PRODUCTO ES OBLIGATORIO") 
-    @Min(value = 1, message = "EL ESTOCK NO PUEDE SER NEGATIVO")
-    private Integer STOCK;
+    @Column(name= "STOCK")
+    @NotNull(message = "El numero de stock es obligatorio")
+    @Min(value=0, message="El stock no puede ser menos de 0")
+	private Integer stock;
+   
+    @ManyToMany(mappedBy = "productos")
+    private List<Pedido> pedidos;
 
-
-	public long getIdProducto() {
-		return idProducto;
+	public long getId() {
+		return id;
 	}
 
-
-	public void setIdProducto(long idProducto) {
-		this.idProducto = idProducto;
+	public void setId(long id) {
+		this.id = id;
 	}
-
 
 	public String getNombre() {
-		return NOMBRE;
+		return nombre;
 	}
-
 
 	public void setNombre(String nombre) {
-		this.NOMBRE = nombre;
+		this.nombre = nombre;
 	}
 
-
-	public String getDESCRIPCION() {
-		return DESCRIPCION;
+	public String getDescripcion() {
+		return descripcion;
 	}
 
-
-	public void setDESCRIPCION(String dESCRIPCION) {
-		DESCRIPCION = dESCRIPCION;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
-
-	public Integer getPRECIO() {
-		return PRECIO;
+	public double getPrecio() {
+		return precio;
 	}
 
-
-	public void setPRECIO(Integer pRECIO) {
-		PRECIO = pRECIO;
+	public void setPrecio(double precio) {
+		this.precio = precio;
 	}
 
-
-	public Integer getSTOCK() {
-		return STOCK;
+	public Integer getStock() {
+		return stock;
 	}
 
-
-	public void setSTOCK(Integer sTOCK) {
-		STOCK = sTOCK;
+	public void setStock(Integer stock) {
+		this.stock = stock;
 	}
+	
+	
+
+
     
-
+    
     
 
     
