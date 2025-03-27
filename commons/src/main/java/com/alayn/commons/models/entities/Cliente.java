@@ -1,11 +1,19 @@
 package com.alayn.commons.models.entities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
@@ -24,8 +32,8 @@ public class Cliente {
     @Id
 	@GeneratedValue(strategy =GenerationType.SEQUENCE, generator ="CLIENTES_SEQ")
 	@SequenceGenerator(name="CLIENTES_SEQ", sequenceName ="CLIENTES_SEQ", allocationSize = 1 )
-	@Column(name= "CLIENTES_SEQ")
-	private long idCliente;
+	@Column(name= "ID_CLIENTE")
+	private long id;
     
     
     @Column(name= "NOMBRE")
@@ -47,20 +55,27 @@ public class Cliente {
     
     @Column(name= "TELEFONO")
    	@NotBlank(message = "El telefono del cliente es obligatorio")
-   	@Size(min=1,max=10,message="El numero debe tener 10 caracteres")
-	private String Telefono;
+   	@Size(min=1,max=20,message="El numero debe tener maximo 20 caracteres")
+	private String telefono;
     
     @Column(name= "DIRECCION")
-   	@Size(min=1,max=50,message="La direccion no debe de contener mas de 50 caracteres")
-	private String Direccion;
+    @Size(max=50)
+	private String direccion;
+    
+     @OneToMany(mappedBy="cliente")
+     @JsonManagedReference    
+    private List<Pedido> pedidos;
 
-	public long getIdCliente() {
-		return idCliente;
+
+	public long getId() {
+		return id;
 	}
 
-	public void setIdCliente(long idCliente) {
-		this.idCliente = idCliente;
+	public void setId(long id) {
+		this.id = id;
 	}
+
+	
 
 	public String getNombre() {
 		return nombre;
@@ -78,7 +93,7 @@ public class Cliente {
 		this.apellido = apellido;
 	}
 
-	public String getEMail() {
+	public String geteMail() {
 		return eMail;
 	}
 
@@ -87,22 +102,38 @@ public class Cliente {
 	}
 
 	public String getTelefono() {
-		return Telefono;
+		return telefono;
 	}
 
 	public void setTelefono(String telefono) {
-		Telefono = telefono;
+		this.telefono = telefono;
 	}
 
 	public String getDireccion() {
-		return Direccion;
+		return direccion;
 	}
 
 	public void setDireccion(String direccion) {
-		Direccion = direccion;
+		this.direccion = direccion;
 	}
 
-    
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
+	
+	@PrePersist
+	public void prePersist() {
+	    if(this.pedidos == null) {
+	        this.pedidos = new ArrayList<>();
+	    }
+	}
+
+
+
     
 
 }
